@@ -11,7 +11,7 @@ function setup(WIDTH, HEIGHT, title, FPS) {
 
 function draw(world) {
   r.BeginDrawing();
-  r.ClearBackground(r.BLACK);
+  r.ClearBackground(r.blue);
 
   r.EndDrawing();
 }
