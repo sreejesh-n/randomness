@@ -48,7 +48,7 @@ function tearDown() {
 function main() {
   const WIDTH = 1000;
   const HEIGHT = 600;
-  const title = "Random Number";
+  const title = "Random Number 01";
   const FPS = 60;
 
   const world = setup(WIDTH, HEIGHT, title, FPS);
