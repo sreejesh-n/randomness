@@ -6,19 +6,27 @@ function setup(WIDTH, HEIGHT, title, FPS) {
 
   const screen = { width: WIDTH, height: HEIGHT };
 
-  return { screen, center, theta };
+  const start = { x: getRandom(WIDTH), y: 0 };
+  const end = { x: getRandom(WIDTH), y: HEIGHT };
+
+  return { screen, start, end };
+}
+
+function getRandom(range) {
+  return Math.random() * range;
 }
 
 function draw(world) {
   r.BeginDrawing();
-  r.ClearBackground(r.blue);
+  r.ClearBackground(r.BLUE);
+
+  r.DrawLineEx(world.start, world.end, 2, r.WHITE);
 
   r.EndDrawing();
 }
 
 function loop(world) {
   while (!r.WindowShouldClose()) {
-    // no update!
     draw(world);
   }
 }
@@ -28,8 +36,8 @@ function tearDown() {
 }
 
 function main() {
-  const WIDTH = 600;
-  const HEIGHT = 400;
+  const WIDTH = 1000;
+  const HEIGHT = 600;
   const title = "Random Number";
   const FPS = 60;
 
