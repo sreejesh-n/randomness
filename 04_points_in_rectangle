@@ -1,0 +1,98 @@
+const r = require("raylib");
+
+function setup(WIDTH, HEIGHT, title, FPS) {
+  r.InitWindow(WIDTH, HEIGHT, title);
+  r.SetTargetFPS(FPS);
+
+  const screen = { width: WIDTH, height: HEIGHT };
+  const noOfPoints = 200;
+  const position = [];
+  const recCorners = {
+    x1: WIDTH / 2 - 200,
+    y1: HEIGHT / 2 - 100,
+    x2: WIDTH / 2 + 200,
+    y2: HEIGHT / 2 + 100,
+  };
+
+  for (let i = 0; i < noOfPoints; i++) {
+    const randomCenter = {
+      x: getRandom(recCorners.x1, recCorners.x2),
+      y: getRandom(recCorners.y1, recCorners.y2),
+    };
+
+    position.push(randomCenter);
+  }
+
+  return { recCorners, position, screen };
+}
+
+function getRandom(rangeStart, rangeEnd) {
+  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
+}
+
+function draw(world) {
+  r.BeginDrawing();
+  r.ClearBackground(r.DARKBLUE);
+
+  const color = {
+    r: 255,
+    g: 255,
+    b: 255,
+    a: 100,
+  };
+
+  for (const center of world.position) {
+    r.DrawCircleV(center, 10, color);
+  }
+
+  const cornerA = {
+    x: world.recCorners.x1,
+    y: world.recCorners.y1,
+  };
+
+  const cornerB = {
+    x: world.recCorners.x2,
+    y: world.recCorners.y1,
+  };
+
+  const cornerC = {
+    x: world.recCorners.x2,
+    y: world.recCorners.y2,
+  };
+
+  const cornerD = {
+    x: world.recCorners.x1,
+    y: world.recCorners.y2,
+  };
+
+  r.DrawLineEx(cornerA, cornerB, 2, r.WHITE);
+  r.DrawLineEx(cornerB, cornerC, 2, r.WHITE);
+  r.DrawLineEx(cornerC, cornerD, 2, r.WHITE);
+  r.DrawLineEx(cornerD, cornerA, 2, r.WHITE);
+
+  r.EndDrawing();
+}
+
+function loop(world) {
+  while (!r.WindowShouldClose()) {
+    draw(world);
+  }
+}
+
+function tearDown() {
+  r.CloseWindow();
+}
+
+function main() {
+  const WIDTH = 1000;
+  const HEIGHT = 600;
+  const title = "Points in rectangle";
+  const FPS = 60;
+
+  const world = setup(WIDTH, HEIGHT, title, FPS);
+  loop(world);
+
+  tearDown();
+}
+
+main();
