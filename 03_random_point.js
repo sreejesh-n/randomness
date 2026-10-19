@@ -5,19 +5,28 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   r.SetTargetFPS(FPS);
 
   const screen = { width: WIDTH, height: HEIGHT };
+
+  const start = { x: 0, y: 0 };
+  const end = { x: WIDTH, y: HEIGHT };
   const noOfPoints = 500;
-  const position = [];
+  const randomPoints = getRandomPoints(start, end, noOfPoints);
+
+  return { randomPoints, screen };
+}
+
+function getRandomPoints(start, end, noOfPoints) {
+  const points = [];
 
   for (let i = 0; i < noOfPoints; i++) {
     const randomCenter = {
-      x: getRandom(0, WIDTH),
-      y: getRandom(0, HEIGHT),
+      x: getRandom(start.x, end.x),
+      y: getRandom(start.y, end.y),
     };
 
-    position.push(randomCenter);
+    points.push(randomCenter);
   }
 
-  return { position, screen };
+  return points;
 }
 
 function getRandom(rangeStart, rangeEnd) {
@@ -35,7 +44,7 @@ function draw(world) {
     a: 100,
   };
 
-  for (const center of world.position) {
+  for (const center of world.randomPoints) {
     r.DrawCircleV(center, 12, color);
   }
 
