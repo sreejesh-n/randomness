@@ -5,23 +5,29 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   r.SetTargetFPS(FPS);
 
   const screen = { width: WIDTH, height: HEIGHT };
-  const randomPos = [];
-
-  for (let i = 0; i < getRandom(WIDTH); i++) {
-    const random = getRandom(WIDTH);
-    const coord = {
-      start: { x: random, y: 0 },
-      end: { x: random, y: HEIGHT },
-    };
-
-    randomPos.push(coord);
-  }
+  const randomPos = getRandomPositions(WIDTH, HEIGHT);
 
   return { randomPos, screen };
 }
 
 function getRandom(range) {
   return Math.random() * range;
+}
+
+function getRandomPositions(width, height) {
+  const randomPos = [];
+
+  for (let i = 0; i < getRandom(width); i++) {
+    const random = getRandom(width);
+    const coord = {
+      start: { x: random, y: 0 },
+      end: { x: random, y: height },
+    };
+
+    randomPos.push(coord);
+  }
+
+  return randomPos;
 }
 
 function draw(world) {
