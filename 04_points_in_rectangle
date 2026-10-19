@@ -6,24 +6,27 @@ function setup(WIDTH, HEIGHT, title, FPS) {
 
   const screen = { width: WIDTH, height: HEIGHT };
   const noOfPoints = 200;
-  const position = [];
-  const recCorners = {
-    x1: WIDTH / 2 - 200,
-    y1: HEIGHT / 2 - 100,
-    x2: WIDTH / 2 + 200,
-    y2: HEIGHT / 2 + 100,
-  };
+  const start = { x: WIDTH / 2 - 200, y: HEIGHT / 2 - 100 };
+  const end = { x: WIDTH / 2 + 200, y: HEIGHT / 2 + 100 };
+
+  const position = getRandomPoints(start, end, noOfPoints);
+
+  return { start, end, position, screen };
+}
+
+function getRandomPoints(start, end, noOfPoints) {
+  const points = [];
 
   for (let i = 0; i < noOfPoints; i++) {
     const randomCenter = {
-      x: getRandom(recCorners.x1, recCorners.x2),
-      y: getRandom(recCorners.y1, recCorners.y2),
+      x: getRandom(start.x, end.x),
+      y: getRandom(start.y, end.y),
     };
 
-    position.push(randomCenter);
+    points.push(randomCenter);
   }
 
-  return { recCorners, position, screen };
+  return points;
 }
 
 function getRandom(rangeStart, rangeEnd) {
@@ -46,23 +49,23 @@ function draw(world) {
   }
 
   const cornerA = {
-    x: world.recCorners.x1,
-    y: world.recCorners.y1,
+    x: world.start.x,
+    y: world.start.y,
   };
 
   const cornerB = {
-    x: world.recCorners.x2,
-    y: world.recCorners.y1,
+    x: world.end.x,
+    y: world.start.y,
   };
 
   const cornerC = {
-    x: world.recCorners.x2,
-    y: world.recCorners.y2,
+    x: world.end.x,
+    y: world.end.y,
   };
 
   const cornerD = {
-    x: world.recCorners.x1,
-    y: world.recCorners.y2,
+    x: world.start.x,
+    y: world.end.y,
   };
 
   r.DrawLineEx(cornerA, cornerB, 2, r.WHITE);
