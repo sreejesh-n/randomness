@@ -5,7 +5,7 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   r.SetTargetFPS(FPS);
 
   const screen = { width: WIDTH, height: HEIGHT };
-  const noOfPoints = 800;
+  const noOfPoints = 400;
   const center = { x: WIDTH / 2, y: HEIGHT / 2 };
   const radius = 200;
 
@@ -23,7 +23,7 @@ function getRandomPoints(center, radius, noOfPoints) {
 
   for (let i = 0; i < noOfPoints; i++) {
     const randomRadious = getRandom(0, radius);
-    const randomAngle = getRandom(0, 360);
+    const randomAngle = getRandom(0, 2 * Math.PI);
     const randomCenter = {
       x: center.x + randomRadious * Math.cos(randomAngle),
       y: center.y + randomRadious * Math.sin(randomAngle),
