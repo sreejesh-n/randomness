@@ -10,6 +10,10 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   return { randomPos, screen };
 }
 
+function getRandom(rangeStart, rangeEnd) {
+  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
+}
+
 function getRandomPositions(rangeStart, rangeEnd, width, height) {
   const randomPos = [];
 
@@ -24,10 +28,6 @@ function getRandomPositions(rangeStart, rangeEnd, width, height) {
   }
 
   return randomPos;
-}
-
-function getRandom(rangeStart, rangeEnd) {
-  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
 }
 
 function draw(world) {

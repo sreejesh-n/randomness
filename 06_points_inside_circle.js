@@ -5,34 +5,34 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   r.SetTargetFPS(FPS);
 
   const screen = { width: WIDTH, height: HEIGHT };
-  const noOfPoints = 1200;
-  const center = { x: 0, y: 0 };
-  const radius = 600;
+  const noOfPoints = 800;
+  const center = { x: WIDTH / 2, y: HEIGHT / 2 };
+  const radius = 200;
 
   const points = getRandomPoints(center, radius, noOfPoints);
 
   return { center, radius, points, screen };
 }
 
+function getRandom(rangeStart, rangeEnd) {
+  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
+}
+
 function getRandomPoints(center, radius, noOfPoints) {
   const points = [];
 
   for (let i = 0; i < noOfPoints; i++) {
-    const randomRadious = getRandom(center.x, center.x + radius);
+    const randomRadious = getRandom(0, radius);
     const randomAngle = getRandom(0, 360);
     const randomCenter = {
-      x: randomRadious * Math.cos(randomAngle),
-      y: randomRadious * Math.sin(randomAngle),
+      x: center.x + randomRadious * Math.cos(randomAngle),
+      y: center.y + randomRadious * Math.sin(randomAngle),
     };
 
     points.push(randomCenter);
   }
 
   return points;
-}
-
-function getRandom(rangeStart, rangeEnd) {
-  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
 }
 
 function draw(world) {
@@ -50,7 +50,7 @@ function draw(world) {
     r.DrawCircleV(center, 10, color);
   }
 
-  r.DrawCircleSectorLines(world.center, world.radius, 0, 90, 360, r.WHITE);
+  r.DrawCircleLines(world.center.x, world.center.y, world.radius, r.WHITE);
 
   r.EndDrawing();
 }

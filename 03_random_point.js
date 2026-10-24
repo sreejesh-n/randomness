@@ -14,6 +14,10 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   return { randomPoints, screen };
 }
 
+function getRandom(rangeStart, rangeEnd) {
+  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
+}
+
 function getRandomPoints(start, end, noOfPoints) {
   const points = [];
 
@@ -27,10 +31,6 @@ function getRandomPoints(start, end, noOfPoints) {
   }
 
   return points;
-}
-
-function getRandom(rangeStart, rangeEnd) {
-  return Math.random() * (rangeEnd - rangeStart) + rangeStart;
 }
 
 function draw(world) {
