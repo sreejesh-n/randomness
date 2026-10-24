@@ -9,9 +9,9 @@ function setup(WIDTH, HEIGHT, title, FPS) {
   const start = { x: WIDTH / 2 - 200, y: HEIGHT / 2 - 100 };
   const end = { x: WIDTH / 2 + 200, y: HEIGHT / 2 + 100 };
 
-  const position = getRandomPoints(start, end, noOfPoints);
+  const points = getRandomPoints(start, end, noOfPoints);
 
-  return { start, end, position, screen };
+  return { start, end, points, screen };
 }
 
 function getRandomPoints(start, end, noOfPoints) {
@@ -44,7 +44,7 @@ function draw(world) {
     a: 100,
   };
 
-  for (const center of world.position) {
+  for (const center of world.points) {
     r.DrawCircleV(center, 10, color);
   }
 
